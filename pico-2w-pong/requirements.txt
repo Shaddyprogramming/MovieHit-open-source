@@ -1,0 +1,110 @@
+# CircuitPython Requirements for Pico 2W Pong
+
+## CircuitPython Version
+- CircuitPython 8.0.0 or later
+- Tested with CircuitPython 8.2.x
+
+## Required CircuitPython Libraries
+The following libraries are built into CircuitPython and required:
+
+### Core Libraries
+- `time` - Timing and delays
+- `gc` - Garbage collection
+- `sys` - System operations
+- `microcontroller` - Hardware control and reset
+- `supervisor` - Runtime management
+
+### Hardware Libraries  
+- `board` - Pin definitions
+- `digitalio` - Digital I/O operations
+- `pwmio` - PWM operations (optional for LED effects)
+
+### Network Libraries
+- `wifi` - WiFi radio control
+- `socketpool` - Socket operations
+- `ssl` - SSL/TLS support (optional)
+
+## Optional Enhancements
+These libraries can be added for additional features:
+
+### Display Support (if adding a screen)
+- `displayio` - Display framework
+- `adafruit_displayio_ssd1306` - OLED display driver
+
+### Advanced Networking
+- `adafruit_httpserver` - More robust HTTP server
+- `adafruit_requests` - HTTP client requests
+
+### Sensors (for future enhancements)
+- `adafruit_mpu6050` - Accelerometer/gyroscope
+- `analogio` - Analog sensor reading
+
+## Installation Notes
+
+### CircuitPython Installation
+1. Download CircuitPython from circuitpython.org
+2. Hold BOOTSEL while connecting Pico 2W to computer
+3. Copy .uf2 file to RPI-RP2 drive
+4. Pico will restart with CircuitPython
+
+### Library Installation
+Most required libraries are built-in to CircuitPython 8.0+.
+For additional libraries:
+
+1. Download from circuitpython.org/libraries
+2. Copy .mpy files to /lib directory on Pico
+3. Restart Pico 2W
+
+### Verification
+Run this code in Thonny to verify all imports work:
+
+```python
+try:
+    import time, gc, sys, board, digitalio, pwmio
+    import socketpool, wifi, microcontroller, supervisor
+    print("All required libraries available ✓")
+except ImportError as e:
+    print(f"Missing library: {e}")
+```
+
+## Hardware Requirements
+
+### Minimum Setup
+- Raspberry Pi Pico 2W
+- Micro USB cable
+- Computer with CircuitPython IDE (Thonny recommended)
+
+### Full Game Setup
+- 3x Push buttons
+- 2x LEDs (any color)
+- 2x 220Ω resistors (for LEDs)
+- 3x 10kΩ resistors (pull-up for buttons)
+- Breadboard
+- Jumper wires
+
+### Power Requirements
+- 5V USB power (minimum 500mA)
+- Stable power supply recommended for WiFi operations
+- Consider battery pack for portable operation
+
+## Development Environment
+
+### Recommended IDE
+- Thonny (built-in CircuitPython support)
+- Alternative: VS Code with CircuitPython extension
+
+### Testing Setup
+1. Use `test_game.py` for initial development in Thonny
+2. Test hardware connections individually
+3. Deploy `code.py` for automatic startup
+4. Monitor serial output for debugging
+
+### File Structure on Pico
+```
+/
+├── code.py          # Main game (auto-runs at startup)
+├── config.py        # Configuration settings
+├── test_game.py     # Development test version
+└── lib/             # Additional libraries (if needed)
+    └── [library files]
+```
